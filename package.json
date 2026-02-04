@@ -1,6 +1,6 @@
 {
   "name": "@braydev/venus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimalist and type-safe network tool inspired by Apple's simplicity.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -18,10 +18,10 @@
     "access": "public"
   },
   "scripts": {
-  "build": "tsup src/index.ts --format cjs,esm --dts --minify",
-  "dev": "tsup src/index.ts --watch --format cjs,esm",
-  "test": "vitest run",
-  "test:watch": "vitest"
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
+    "dev": "tsup src/index.ts --watch --format cjs,esm",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
     "@types/node": "^25.2.0",
