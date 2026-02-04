@@ -1,6 +1,6 @@
 {
   "name": "@braydev/venus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Minimalist and type-safe network tool inspired by Apple's simplicity.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
