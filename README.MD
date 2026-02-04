@@ -26,21 +26,23 @@ making network requests simple, elegant, and reliable.
 
 ## 🚀 Quick Start
 
-### 1. Configuration
+Get up and running with Venus in minutes.
 
-Set your base URL once at the entry point of your application (e.g., `main.ts` or `index.ts`).
+### 1. Configure the base URL
 
-```typescript
+Set your API base URL once at your app’s entry point (e.g. `main.ts` or `index.ts`).
+
+```ts
 import { venusConfig } from "@code-braydev/venus";
 
 venusConfig.setBaseURL("https://api.yourdomain.com");
 ```
 
-### 2. Basic Usage
+### 2. Make your first request
 
-Venus returns a consistent object. You don't need to wrap calls in `try/catch`.
+Venus always returns a predictable response object — no try/catch required.
 
-```typescript
+```ts
 import { get, send } from "@code-braydev/venus";
 
 // Fetching data
@@ -56,6 +58,11 @@ if (ok) {
 const newUser = { name: "Brayan", role: "Developer" };
 const result = await send("/users", newUser);
 ```
+
+That’s it.
+No boilerplate. No guesswork. Just clean network calls.
+
+---
 
 ## 📦 API Methods
 
