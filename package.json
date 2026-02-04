@@ -1,7 +1,7 @@
 {
   "name": "@braydev/venus",
   "version": "1.0.2",
-  "description": "Minimalist and type-safe network tool inspired by Apple's simplicity.",
+  "description": "A lightweight, type-safe networking library focused on clean and predictable API calls.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
