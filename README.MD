@@ -66,20 +66,22 @@ No boilerplate. No guesswork. Just clean network calls.
 
 ## 📦 API Methods
 
-| Method       | Function                              | Description                                   |
-| :----------- | :------------------------------------ | :-------------------------------------------- |
-| `get`        | `get<T>(path, headers?, timeout?)`    | Fetch resources with auto-timeout.            |
-| `send`       | `send<T>(path, body, headers?)`       | Create resources (POST) with body validation. |
-| `update`     | `update<T>(path, body, headers?)`     | Full resource replacement (PUT).              |
-| `updateOnly` | `updateOnly<T>(path, body, headers?)` | Partial modification (PATCH).                 |
-| `remove`     | `remove<T>(path, headers?)`           | Delete resources with 204 status handling.    |
+| Method       | Function                              | Description                                  |
+| :----------- | :------------------------------------ | :------------------------------------------- |
+| `get`        | `get<T>(path, headers?, timeout?)`    | Fetch resources with a built-in timeout.     |
+| `send`       | `send<T>(path, body, headers?)`       | Create resources (POST) with validated body. |
+| `update`     | `update<T>(path, body, headers?)`     | Replace resources entirely (PUT).            |
+| `updateOnly` | `updateOnly<T>(path, body, headers?)` | Update resources partially (PATCH).          |
+| `remove`     | `remove<T>(path, headers?)`           | Delete resources with 204 handling.          |
 
 ### 🧪 Testing
 
-Venus is fully tested using Vitest. To run the suite:
+Venus is fully tested with **Vitest**.  
+Run the test suite with:
 
 ```bash
 npm test
+
 ```
 
 ## 📄 License
