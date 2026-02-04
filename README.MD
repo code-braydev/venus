@@ -40,7 +40,7 @@ venusConfig.setBaseURL("https://api.yourdomain.com");
 
 ### 2. Make your first request
 
-Venus always returns a predictable response object — no try/catch required.
+Venus always returns a predictable response object — no `try/catch` required.
 
 ```ts
 import { get, send } from "@code-braydev/venus";
