@@ -33,7 +33,7 @@ Get up and running with Venus in minutes.
 Set your API base URL once at your app’s entry point (e.g. `main.ts` or `index.ts`).
 
 ```ts
-import { venusConfig } from "@code-braydev/venus";
+import { venusConfig } from "@braydev/venus";
 
 venusConfig.setBaseURL("https://api.yourdomain.com");
 ```
@@ -43,7 +43,7 @@ venusConfig.setBaseURL("https://api.yourdomain.com");
 Venus always returns a predictable response object — no `try/catch` required.
 
 ```ts
-import { get, send } from "@code-braydev/venus";
+import { get, send } from "@braydev/venus";
 
 // Fetching data
 const { data, ok, error } = await get<User>("/profile");
