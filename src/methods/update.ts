@@ -2,7 +2,8 @@ import { request } from "../core/request";
 import { VenusResponse } from "../core/types";
 
 /**
- * Common logic for update operations to ensure body consistency and error capturing.
+ * Shared logic for update operations to ensure body consistency and detailed error capturing.
+ * This helper unifies the processing for both PUT and PATCH methods.
  */
 async function performUpdate<T>(
   path: string,
@@ -10,7 +11,11 @@ async function performUpdate<T>(
   body: any,
   headers?: HeadersInit,
 ): Promise<VenusResponse<T>> {
-  // Prevent empty updates to save bandwidth
+  /**
+   * Pre-flight Check:
+   * Ensures the payload is not empty to save bandwidth and prevent the server
+   * from processing invalid update requests.
+   */
   if (!body || (typeof body === "object" && Object.keys(body).length === 0)) {
     return {
       data: null,
@@ -27,8 +32,11 @@ async function performUpdate<T>(
       body: JSON.stringify(body),
     });
 
-    // Extract detailed feedback if the server rejects the data
-    // Useful for validation errors (e.g., "invalid date format" or "missing required field")
+    /**
+     * Server Feedback Extraction:
+     * Captures specific validation messages (e.g., "invalid email format")
+     * commonly sent by modern backends like NestJS or Express.
+     */
     if (!response.ok) {
       const serverMessage = (response.data as any)?.message || response.error;
       return {
@@ -39,6 +47,7 @@ async function performUpdate<T>(
 
     return response;
   } catch (err: any) {
+    // Handle unexpected serialization or network-level interruptions
     return {
       data: null,
       ok: false,
@@ -49,8 +58,12 @@ async function performUpdate<T>(
 }
 
 /**
- * update: Full resource replacement (PUT).
- * Use this when you want to overwrite the entire object.
+ * Performs a full resource replacement using HTTP PUT.
+ * Use this when you want to overwrite an entire object with a complete new data set.
+ * * @param path - The endpoint or absolute URL of the resource.
+ * @param body - The complete data object to replace the resource.
+ * @param headers - Optional custom headers (e.g., Auth tokens).
+ * @returns A promise with the standardized VenusResponse.
  */
 export const update = async <T>(
   path: string,
@@ -61,8 +74,12 @@ export const update = async <T>(
 };
 
 /**
- * updateOnly: Partial resource modification (PATCH).
+ * Performs a partial resource modification using HTTP PATCH.
  * Use this to update specific fields without affecting the rest of the object.
+ * * @param path - The endpoint or absolute URL of the resource.
+ * @param body - An object containing only the fields you wish to change.
+ * @param headers - Optional custom headers (e.g., Auth tokens).
+ * @returns A promise with the standardized VenusResponse.
  */
 export const updateOnly = async <T>(
   path: string,

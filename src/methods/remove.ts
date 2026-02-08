@@ -2,8 +2,10 @@ import { request } from "../core/request";
 import { VenusResponse } from "../core/types";
 
 /**
- * Performs a DELETE request to remove a resource.
- * Handles No-Content responses and server-side rejection messages.
+ * Performs a DELETE request to remove a specific resource.
+ * Optimized to handle '204 No Content' success states and server-side error extraction.
+ * * @param path - The endpoint or absolute URL of the resource to be deleted.
+ * @param headers - Optional custom headers for the request.
  */
 export const remove = async <T>(
   path: string,
@@ -14,24 +16,31 @@ export const remove = async <T>(
     headers,
   });
 
-  // Handle HTTP 204 (No Content)
-  // Common in successful DELETE operations where no data is returned.
+  /**
+   * Success Handling: HTTP 204 (No Content)
+   * Common in RESTful APIs where a successful deletion does not return a body.
+   * We explicitly mark this as successful and clear any residual errors.
+   */
   if (response.status === 204) {
     return {
       ...response,
       ok: true,
+      data: null as any, // Standardize empty body for successful deletions
       error: null,
     };
   }
 
-  // Handle Server-Side Rejection (4xx or 5xx)
-  // Captures specific error messages from the backend (e.g., "Access Denied" or "Resource in use")
+  /**
+   * Error Normalization: Handle Server-Side Rejection (4xx or 5xx)
+   * Attempts to extract a readable message from the backend (e.g., JSON response with { message: "..." })
+   * Fallback to the standard status text if no specific error body is provided.
+   */
   if (!response.ok) {
     const serverMessage = (response.data as any)?.message || response.error;
 
     return {
       ...response,
-      error: `Venus: Delete failed. ${serverMessage}`,
+      error: `Venus: Delete operation failed. ${serverMessage}`,
     };
   }
 

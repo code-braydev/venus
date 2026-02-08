@@ -1,5 +1,12 @@
 # 🪐 Venus
 
+### 🚀 New in v1.2.0
+
+- **Smart Parsing**: Automatically detects if the response is JSON or Text (perfect for RSS/XML).
+- **Multi-Format Support**: Added support for `blob`, `formData`, and `arrayBuffer`.
+- **Query Params**: New `params` option to handle URL query strings safely.
+- **Enhanced DX**: Full JSDoc documentation for better IntelliSense in VS Code.
+
 ### Networking, without the friction.
 
 Venus is a modern, lightweight networking library for JavaScript and TypeScript that makes working with APIs feel effortless.
@@ -57,6 +64,24 @@ if (ok) {
 // Sending data
 const newUser = { name: "Brayan", role: "Developer" };
 const result = await send("/users", newUser);
+
+// --- New in v1.2.0: Powerful Query Params & Smart Parsing ---
+
+// Effortless filtering with the 'params' option
+const { data: news } = await get("/latest", {
+  params: { category: "tech", limit: 5 },
+});
+
+/**
+ * Smart Response Detection:
+ * Venus automatically detects if 'news' should be a JavaScript Object (JSON)
+ * or a raw String (RSS/XML/HTML). No extra configuration required.
+ */
+if (typeof news === "string") {
+  console.log("RSS/XML content detected:", news);
+} else {
+  console.log("JSON API object detected:", news);
+}
 ```
 
 That’s it.
